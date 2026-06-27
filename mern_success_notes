@@ -1,0 +1,1422 @@
+�
+� ULTIMATE MERN STACK 
+INTERVIEW NOTES 
+2–10 LPA Fresher to Mid-Level Preparation Guide 
+✅ 150 JS Questions  ✅ 100 React  ✅ 100 Node.js 
+✅ 80 MongoDB  ✅ 50 Express  ✅ 30 JWT/Auth 
+✅ 100 Coding Questions  ✅ 50 MCQs  ✅ HR + Resume + Project 
+✅ Login API  ✅ CRUD API  ✅ Output-based JS Questions 
+Prepared with code examples, definitions & real interview patterns 
+⚡ SECTION 1: JAVASCRIPT (150 Questions) 
+PART A: Core Concepts & Definitions (Q1–Q30) 
+Q: 1. What is JavaScript? 
+A: JavaScript is a lightweight, interpreted, single-threaded scripting language used to make web pages 
+interactive. It supports OOP, functional, and event-driven programming. 
+Q: 2. What is the difference between var, let, and const? 
+A: var: function-scoped, hoisted (undefined). let: block-scoped, not hoisted (TDZ). const: block-scoped, 
+must be initialized, cannot be reassigned. 
+Q: 3. What is hoisting? 
+A: Hoisting is JS's default behavior of moving declarations to the top of their scope before execution. 
+var declarations are hoisted (as undefined), function declarations are fully hoisted. let/const are hoisted 
+but stay in Temporal Dead Zone. 
+Q: 4. What is a closure? 
+A: A closure is a function that remembers its outer lexical scope even when executed outside that 
+scope. Used for data privacy, memoization, and factory functions. 
+Q: 5. What is the event loop? 
+A: The event loop continuously checks the call stack and callback queue. When the stack is empty, it 
+pushes callbacks from the queue. It's what makes JS asynchronous despite being single-threaded. 
+Q: 6. What is a Promise? 
+A: A Promise represents a future value. It has 3 states: pending, fulfilled, rejected. Chained with 
+.then()/.catch()/.finally(). Avoids callback hell. 
+Q: 7. What is async/await? 
+A: Syntactic sugar over Promises. async function returns a Promise. await pauses execution until 
+Promise resolves. Makes async code look synchronous. 
+Q: 8. Difference between == and ===? 
+A: == does type coercion before comparison. === checks both value AND type without coercion. 
+Always prefer === for predictable behavior. 
+Q: 9. What is the 'this' keyword? 
+A: this refers to the object that calls the function. In global scope: window (browser). In object method: 
+the object. Arrow functions don't have their own this—they inherit from parent scope. 
+Q: 10. What are arrow functions? 
+A: Arrow functions are a shorter syntax: (params) => expression. They don't have their own this, 
+arguments, super. Cannot be used as constructors. 
+Q: 11. What is prototypal inheritance? 
+A: Objects in JS inherit from other objects via __proto__ chain. When a property isn't found, JS walks 
+up the prototype chain until null. 
+Q: 12. What is the difference between null and undefined? 
+A: undefined: variable declared but not assigned. null: intentional absence of value (must be explicitly 
+set). typeof null === 'object' (JS bug). 
+Q: 13. What is event delegation? 
+A: Instead of adding event listeners to every child, add one to the parent. Uses event bubbling. Efficient 
+for dynamic elements: parent.addEventListener('click', e => { if(e.target.matches('.btn')) ... }) 
+Q: 14. What is debouncing? 
+A: Debouncing delays function execution until after a wait time since the last call. Used for search 
+input, window resize. Example: clearTimeout(timer); timer = setTimeout(fn, delay) 
+Q: 15. What is throttling? 
+A: Throttling ensures a function runs at most once every N milliseconds. Used for scroll/mousemove 
+events. Maintains regular execution rate unlike debounce. 
+Q: 16. What is the spread operator? 
+A: ... operator spreads iterable elements. Used for: [...arr1, ...arr2] (merge arrays), {...obj1, ...obj2} 
+(merge objects), function calls: fn(...args) 
+Q: 17. What is destructuring? 
+A: Extract values from arrays/objects: const {name, age} = person; const [first, ...rest] = arr; Can have 
+defaults: const {x = 0} = obj; 
+Q: 18. What are template literals? 
+A: Backtick strings: `Hello ${name}`. Support multi-line strings, expression interpolation, tagged 
+templates. Much cleaner than string concatenation. 
+Q: 19. What is a generator function? 
+A: function* gen() { yield 1; yield 2; } Returns iterator. Pauses at each yield. Used for lazy evaluation, 
+infinite sequences, async flow control. 
+Q: 20. What is Symbol? 
+A: Symbol() creates unique primitive value. Used as object property keys to avoid naming conflicts. 
+Symbol('id') !== Symbol('id') always. 
+Q: 21. What is WeakMap/WeakSet? 
+A: WeakMap: keys must be objects, doesn't prevent GC. WeakSet: only objects, no iteration. Used for 
+private data, caching without memory leaks. 
+Q: 22. What is Object.freeze() vs Object.seal()? 
+A: freeze(): can't add/remove/modify properties. seal(): can't add/remove but CAN modify existing 
+values. Both are shallow. 
+Q: 23. What is the difference between call, apply, bind? 
+A: call(ctx, a, b): invokes immediately with individual args. apply(ctx, [a,b]): invokes with array. 
+bind(ctx): returns new function with fixed this. 
+Q: 24. What is memoization? 
+A: Caching function results for repeated inputs. function memoize(fn) { const cache = {}; return (x) => 
+cache[x] || (cache[x] = fn(x)); } 
+Q: 25. What is currying? 
+A: Transforming f(a,b,c) into f(a)(b)(c). const add = a => b => a + b; add(2)(3) === 5. Used for partial 
+application. 
+Q: 26. What is the Temporal Dead Zone (TDZ)? 
+A: Period between entering scope and let/const declaration. Accessing variable in TDZ throws 
+ReferenceError. Prevents use-before-declare bugs. 
+Q: 27. What are Proxy and Reflect? 
+A: Proxy wraps object to intercept operations: new Proxy(target, {get(t,k){...}, set(t,k,v){...}}). Reflect 
+provides methods for interceptable operations. 
+Q: 28. What is optional chaining? 
+A: user?.address?.city - returns undefined instead of throwing if any part is null/undefined. Works with 
+methods: obj.method?.() and arrays: arr?.[0]. 
+Q: 29. What is nullish coalescing? 
+A: ?? returns right side only when left is null/undefined. Unlike ||, it doesn't treat 0, false, '' as falsy. x ?? 
+'default'. 
+Q: 30. What is the difference between map, filter, reduce? 
+A: map: transforms each element, returns same length array. filter: returns elements passing test. 
+reduce: accumulates to single value. All return new arrays (non-mutating). 
+PART B: Output-Based Questions (Q31–Q60) 
+31. What is the output? 
+console.log(typeof null); 
+console.log(typeof undefined); 
+console.log(null == undefined); 
+console.log(null === undefined); 
+Answer: Output: "object"  // JS historical bug "undefined" true       
+checks type too 
+// == does coercion false      
+// === 
+32. What is the output? 
+for (var i = 0; i < 3; i++) { 
+setTimeout(() => console.log(i), 0); 
+} 
+Answer: Output: 3 3 3 Explanation: var is function-scoped. By the time setTimeout fires, loop has 
+finished and i=3. Fix: use let (block-scoped) or IIFE. 
+33. What is the output? 
+console.log(0.1 + 0.2 === 0.3); 
+console.log(0.1 + 0.2); 
+Answer: Output: false 0.30000000000000004 Floating point precision issue. Fix: Math.abs((0.1+0.2) - 
+0.3) < Number.EPSILON 
+34. What is the output? 
+const obj = { a: 1 }; 
+const copy = obj; 
+copy.a = 99; 
+console.log(obj.a); 
+Answer: Output: 99 Objects are reference types. copy and obj point to same memory. Fix: const copy = 
+{...obj} or Object.assign({}, obj) 
+35. Closure example output? 
+function counter() { 
+let count = 0; 
+return () => ++count; 
+} 
+const inc = counter(); 
+console.log(inc(), inc(), inc()); 
+Answer: Output: 1 2 3 Closure remembers 'count' in outer scope across multiple calls. 
+36. What is the output? 
+console.log(1 + '2'); 
+console.log('3' - 1); 
+console.log('5' * '2'); 
+Answer: Output: "12"  // + with string = concatenation 2     // - converts to number 10    // * converts both 
+37. Hoisting output? 
+console.log(a); 
+console.log(b); 
+var a = 5; 
+let b = 10; 
+Answer: Output: undefined  // var hoisted as undefined ReferenceError: Cannot access 'b' before 
+initialization (TDZ) 
+38. Promise chain output? 
+Promise.resolve(1) 
+.then(x => x + 1) 
+.then(x => { throw x }) 
+.then(x => console.log('then:', x)) 
+.catch(x => console.log('catch:', x)); 
+Answer: Output: catch: 2 The throw in second .then() skips remaining .then() and goes to .catch() 
+39. What is the output? 
+const a = [1, 2, 3]; 
+const b = [1, 2, 3]; 
+console.log(a === b); 
+console.log(JSON.stringify(a) === JSON.stringify(b)); 
+Answer: Output: false  // Different references in memory true   // String comparison of values 
+40. Event loop order? 
+console.log('1'); 
+setTimeout(() => console.log('2'), 0); 
+Promise.resolve().then(() => console.log('3')); 
+console.log('4'); 
+Answer: Output: 1, 4, 3, 2 Sync first, then microtasks (Promise), then macrotasks (setTimeout) 
+PART C: JavaScript Coding Questions (Q61–Q100) 
+41. Reverse a string without built-in methods 
+function reverseStr(str) { 
+  let result = ''; 
+  for(let i = str.length - 1; i >= 0; i--) { 
+    result += str[i]; 
+  } 
+  return result; 
+} 
+// One-liner: str.split('').reverse().join('') 
+ 
+42. Check if string is palindrome 
+function isPalindrome(str) { 
+  const clean = str.toLowerCase().replace(/[^a-z0-9]/g, ''); 
+  return clean === clean.split('').reverse().join(''); 
+} 
+ 
+43. Find duplicate elements in array 
+function findDuplicates(arr) { 
+  return arr.filter((item, index) => arr.indexOf(item) !== index); 
+} 
+// Or using Set: 
+function findDuplicates2(arr) { 
+  const seen = new Set(); 
+  return arr.filter(x => seen.has(x) ? true : !seen.add(x)); 
+} 
+ 
+44. Deep clone an object 
+// Method 1: JSON (simple, loses functions/dates) 
+const clone = JSON.parse(JSON.stringify(obj)); 
+ 
+// Method 2: structuredClone (modern) 
+const clone2 = structuredClone(obj); 
+ 
+// Method 3: Recursive 
+function deepClone(obj) { 
+  if(obj === null || typeof obj !== 'object') return obj; 
+  const clone = Array.isArray(obj) ? [] : {}; 
+  for(let key in obj) { 
+    clone[key] = deepClone(obj[key]); 
+  } 
+  return clone; 
+} 
+ 
+45. Flatten nested array 
+// Method 1: flat() 
+const flat = arr.flat(Infinity); 
+ 
+// Method 2: Recursive 
+function flatten(arr) { 
+  return arr.reduce((acc, val) => 
+    Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val), []); 
+} 
+ 
+46. Implement debounce 
+function debounce(fn, delay) { 
+  let timer; 
+  return function(...args) { 
+    clearTimeout(timer); 
+    timer = setTimeout(() => fn.apply(this, args), delay); 
+  }; 
+} 
+ 
+// Usage: 
+const debouncedSearch = debounce(searchAPI, 300); 
+input.addEventListener('input', debouncedSearch); 
+ 
+47. Implement throttle 
+function throttle(fn, limit) { 
+  let lastCall = 0; 
+  return function(...args) { 
+    const now = Date.now(); 
+    if(now - lastCall >= limit) { 
+      lastCall = now; 
+      fn.apply(this, args); 
+    } 
+  }; 
+} 
+ 
+48. Group array of objects by key 
+function groupBy(arr, key) { 
+  return arr.reduce((acc, obj) => { 
+    const group = obj[key]; 
+    acc[group] = acc[group] || []; 
+    acc[group].push(obj); 
+    return acc; 
+  }, {}); 
+} 
+ 
+// Example: 
+const people = [{name:'A',city:'Delhi'},{name:'B',city:'Mumbai'}]; 
+groupBy(people, 'city'); 
+ 
+49. Implement Promise.all from scratch 
+function myPromiseAll(promises) { 
+  return new Promise((resolve, reject) => { 
+    const results = []; 
+    let count = 0; 
+    promises.forEach((p, i) => { 
+      Promise.resolve(p).then(val => { 
+        results[i] = val; 
+if(++count === promises.length) resolve(results); 
+}).catch(reject); 
+}); 
+}); 
+} 
+50. Memoize a function 
+function memoize(fn) { 
+const cache = new Map(); 
+return function(...args) { 
+const key = JSON.stringify(args); 
+if(cache.has(key)) return cache.get(key); 
+const result = fn.apply(this, args); 
+cache.set(key, result); 
+return result; 
+}; 
+} 
+const memoFib = memoize(function fib(n) { 
+if(n <= 1) return n; 
+return memoFib(n-1) + memoFib(n-2); 
+}); 
+PART D: Advanced JS Concepts (Q101–Q150) 
+Q: 51. What is the difference between synchronous and asynchronous code? 
+A: Synchronous: executes line by line, blocks further execution. Asynchronous: doesn't block—
+schedules work to be done later (callbacks, promises, async/await). 
+Q: 52. Explain event bubbling and capturing. 
+A: Bubbling: event fires on target, then bubbles up to ancestors. Capturing: event fires from root down 
+to target. Use addEventListener(event, fn, true) for capture phase. stopPropagation() stops bubbling. 
+Q: 53. What is the difference between forEach, map, and for...of? 
+A: forEach: iterates, returns undefined, can't break. map: returns new array. for...of: works on iterables, 
+can use break/continue. for...of is most flexible. 
+Q: 54. How does JavaScript handle memory management? 
+A: Uses garbage collection (mark-and-sweep). Objects with no references are collected. Closures, 
+global variables, detached DOM nodes can cause memory leaks. 
+Q: 55. What is a pure function? 
+A: Returns same output for same input, has no side effects (doesn't modify external state). fn(a, b) { 
+return a + b } is pure. fn(a) { count++ } is impure. 
+Q: 56. What is the difference between Object.keys(), values(), entries()? 
+A: keys(): ['name','age']. values(): ['John',25]. entries(): [['name','John'],['age',25]]. All return arrays, work 
+on own enumerable properties. 
+Q: 57. What is IIFE? 
+A: Immediately Invoked Function Expression: (function() { ... })(). Runs immediately, creates private 
+scope, avoids polluting global namespace. Common before modules. 
+Q: 58. What is the module pattern? 
+A: const module = (function() { let private = 0; return { get: () => private, inc: () => ++private }; })(); 
+Exposes public API while hiding private state. 
+Q: 59. How do ES6 modules differ from CommonJS? 
+A: ES6: import/export (static, tree-shakeable, async loading). CommonJS: require/module.exports 
+(dynamic, synchronous, Node.js default). ES6 modules are the standard. 
+Q: 60. What is the 'new' keyword? 
+A: 1) Creates empty object. 2) Sets prototype to constructor.prototype. 3) Binds this to new object. 4) 
+Returns the object (unless constructor returns object explicitly). 
+⚛️ SECTION 2: REACT (100 Questions) 
+PART A: Core React Concepts (Q1–Q40) 
+Q: 1. What is React? 
+A: React is a declarative, component-based JavaScript library by Meta for building UIs. Uses Virtual 
+DOM for efficient re-rendering, unidirectional data flow. 
+Q: 2. What is JSX? 
+A: JSX (JavaScript XML) is syntax extension allowing HTML-like code in JS. Babel compiles it to 
+React.createElement() calls. Must have single root element or Fragment. 
+Q: 3. What is the Virtual DOM? 
+A: A lightweight JavaScript object copy of the real DOM. React diffs new vs old VDOM (reconciliation) 
+and only updates changed parts in the real DOM (batched updates). 
+Q: 4. What are components? 
+A: Reusable UI building blocks. Function components (modern, hooks) or Class components (older). 
+Each manages its own state and renders JSX. 
+Q: 5. What are props? 
+A: Read-only data passed from parent to child. Props flow down (unidirectional). Children can't modify 
+props. Accessed via function params: function Btn({label, onClick}). 
+Q: 6. What is state? 
+A: Local mutable data managed within a component. Changes trigger re-render. Use useState hook: 
+const [count, setCount] = useState(0). Never mutate directly. 
+Q: 7. What are React Hooks? 
+A: Functions letting functional components use React features. useState (state), useEffect (side 
+effects), useContext (context), useRef (refs), useMemo, useCallback, useReducer. 
+Q: 8. What is useEffect? 
+A: Runs side effects after render. useEffect(() => { /* effect */ return () => { /* cleanup */ }; }, [deps]). 
+Empty deps []: run once. No deps: run every render. 
+Q: 9. What is useState? 
+A: const [state, setState] = useState(initialValue). setState triggers re-render. For objects/arrays, 
+spread to avoid mutation: setState({...state, key: value}). 
+Q: 10. What is the difference between controlled and uncontrolled components? 
+A: Controlled: form data managed by React state (value + onChange). Uncontrolled: DOM manages 
+data, accessed via useRef. Controlled preferred for validation. 
+Q: 11. What is useRef? 
+A: Returns mutable ref object {current: initial}. Persists across renders without causing re-render. Uses: 
+DOM access, storing previous values, timeout IDs. 
+Q: 12. What is useMemo? 
+A: const memoized = useMemo(() => expensiveCalc(a, b), [a, b]). Memoizes computed value, 
+recomputes only when deps change. Avoids expensive recalculations. 
+Q: 13. What is useCallback? 
+A: const memoFn = useCallback(() => fn(a, b), [a, b]). Memoizes function reference. Prevents child re
+renders when passing callbacks as props. 
+Q: 14. What is useContext? 
+A: Reads value from React Context without prop drilling. const value = useContext(MyContext). Create: 
+const MyContext = createContext(defaultValue). 
+Q: 15. What is useReducer? 
+A: const [state, dispatch] = useReducer(reducer, initialState). Alternative to useState for complex state 
+logic. dispatch({type:'INCREMENT'}) → reducer handles. 
+Q: 16. What is React.memo? 
+A: Higher-order component: const Comp = React.memo(MyComp). Prevents re-render if props haven't 
+changed. Shallow comparison. Pass custom comparator as 2nd arg. 
+Q: 17. What are keys in React lists? 
+A: Unique identifier for list items. Helps React identify which items changed/added/removed during 
+reconciliation. Use stable IDs, never index (causes bugs with reordering). 
+Q: 18. What is prop drilling? 
+A: Passing props through many intermediate components that don't need them. Solutions: Context API, 
+Redux, Zustand, or component composition. 
+Q: 19. What is React Context? 
+A: Way to share global data (theme, auth) without prop drilling. Provider wraps components; 
+Consumer/useContext reads value. Re-renders all consumers on change. 
+Q: 20. What is reconciliation? 
+A: React's algorithm for diffing Virtual DOM trees. Assumptions: different element types = different tree, 
+keys identify list items. Results in minimal DOM updates. 
+Q: 21. What is lazy loading in React? 
+A: const LazyComp = React.lazy(() => import('./Heavy')). Splits bundle, loads on demand. Must be 
+wrapped in Suspense: <Suspense fallback={<Loader/>}>. 
+Q: 22. What is React.Fragment? 
+A: <React.Fragment> or shorthand <>...</> groups elements without extra DOM node. Avoids 
+unnecessary div wrappers in DOM. 
+Q: 23. What is the difference between useEffect and useLayoutEffect? 
+A: useEffect: runs async after paint. useLayoutEffect: runs sync after DOM mutations, before paint. 
+Use useLayoutEffect for DOM measurements to avoid flicker. 
+Q: 24. What is custom hook? 
+A: Function starting with 'use' that calls other hooks. Extracts reusable stateful logic: useFetch(url), 
+useLocalStorage(key), useDebounce(value, delay). 
+Q: 25. What are Higher Order Components (HOC)? 
+A: Function that takes component, returns enhanced component: const Enhanced = 
+withAuth(OriginalComp). Pattern for cross-cutting concerns. Largely replaced by hooks. 
+Q: 26. What is the difference between React and React-DOM? 
+A: React: core library (component, hooks, createElement). React-DOM: renders to browser DOM. 
+Separation allows React to target multiple platforms (Native, etc). 
+Q: 27. What is StrictMode? 
+A: <React.StrictMode> enables extra checks in development: double-invokes renders to detect side 
+effects, warns about deprecated APIs. No effect in production. 
+Q: 28. What is error boundary? 
+A: Class component with componentDidCatch/getDerivedStateFromError. Catches JS errors in child 
+component tree, shows fallback UI. Hooks can't implement error boundaries. 
+Q: 29. What is the difference between state and props? 
+A: State: local, mutable, managed by component itself. Props: external, read-only, passed by parent. 
+State changes trigger re-render; so do prop changes. 
+Q: 30. How does React handle events? 
+A: React uses SyntheticEvent wrapper (cross-browser). Events bubble up. Use onClick, onChange 
+(camelCase). e.preventDefault(), e.stopPropagation() still work. 
+PART B: React Coding Examples (Q31–Q70) 
+31. Create a counter with useState 
+import { useState } from 'react'; 
+ 
+function Counter() { 
+  const [count, setCount] = useState(0); 
+  return ( 
+    <div> 
+      <p>Count: {count}</p> 
+      <button onClick={() => setCount(c => c + 1)}>+</button> 
+      <button onClick={() => setCount(c => c - 1)}>-</button> 
+      <button onClick={() => setCount(0)}>Reset</button> 
+    </div> 
+  ); 
+} 
+ 
+32. Custom useFetch hook 
+import { useState, useEffect } from 'react'; 
+ 
+function useFetch(url) { 
+  const [data, setData] = useState(null); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
+ 
+  useEffect(() => { 
+    let cancelled = false; 
+    fetch(url) 
+      .then(res => res.json()) 
+      .then(data => { if(!cancelled) setData(data); }) 
+      .catch(err => { if(!cancelled) setError(err); }) 
+      .finally(() => { if(!cancelled) setLoading(false); }); 
+    return () => { cancelled = true; }; 
+  }, [url]); 
+ 
+  return { data, loading, error }; 
+} 
+ 
+33. Context API with Provider 
+const AuthContext = createContext(null); 
+ 
+export function AuthProvider({ children }) { 
+  const [user, setUser] = useState(null); 
+  const login = (userData) => setUser(userData); 
+  const logout = () => setUser(null); 
+  return ( 
+    <AuthContext.Provider value={{ user, login, logout }}> 
+      {children} 
+    </AuthContext.Provider> 
+  ); 
+} 
+ 
+export const useAuth = () => useContext(AuthContext); 
+ 
+// Usage: const { user, login } = useAuth(); 
+ 
+34. useReducer for complex state 
+const initialState = { count: 0, step: 1 }; 
+ 
+function reducer(state, action) { 
+  switch(action.type) { 
+    case 'INCREMENT': return { ...state, count: state.count + state.step }; 
+    case 'DECREMENT': return { ...state, count: state.count - state.step }; 
+    case 'SET_STEP':  return { ...state, step: action.payload }; 
+    case 'RESET':     return initialState; 
+    default: return state; 
+  } 
+} 
+ 
+function Counter() { 
+  const [state, dispatch] = useReducer(reducer, initialState); 
+  return <button onClick={() => 
+dispatch({type:'INCREMENT'})}>+{state.step}</button>; 
+} 
+ 
+35. Protected Route component 
+import { Navigate } from 'react-router-dom'; 
+ 
+function ProtectedRoute({ children }) { 
+  const { user } = useAuth(); 
+  if (!user) return <Navigate to='/login' replace />; 
+  return children; 
+} 
+ 
+// In router: 
+// <Route path='/dashboard' element={ 
+//   <ProtectedRoute><Dashboard /></ProtectedRoute> 
+// } /> 
+ 
+  
+PART C: Advanced React Questions (Q71–Q100) 
+Q: 36. What is React Router? Main components? 
+A: Library for client-side routing. BrowserRouter: wraps app. Routes/Route: define paths. Link/NavLink: 
+navigation. useNavigate: programmatic navigation. useParams: URL params. 
+Q: 37. What is Redux? 
+A: Predictable state container. Store (single source of truth) → Action → Reducer → new State. 
+connect() or useSelector/useDispatch hooks. Good for large apps with shared state. 
+Q: 38. Redux Toolkit vs plain Redux? 
+A: RTK is official recommended approach. createSlice() auto-generates actions+reducers. 
+configureStore() sets up middleware. Immer built-in allows 'mutating' syntax. 
+Q: 39. What is React Query (TanStack Query)? 
+A: Library for server state management. useQuery for fetching, useMutation for updates. Auto-caching, 
+background refetching, stale-while-revalidate, loading/error states. 
+Q: 40. Difference between Redux and Context? 
+A: Context: built-in, good for low-frequency updates (auth, theme). Redux: external lib, DevTools, 
+middleware (thunk/saga), optimized for frequent state changes. Don't mix them incorrectly. 
+Q: 41. What are render props? 
+A: Pattern: <DataFetcher render={(data) => <List data={data} />} />. Component receives function as 
+prop and calls it with data. Now largely replaced by hooks. 
+Q: 42. What is code splitting? 
+A: Splitting JS bundle into chunks loaded on demand. React.lazy + Suspense for component-level 
+splitting. react-router supports route-level splitting. Reduces initial load time. 
+Q: 43. How to optimize React performance? 
+A: React.memo, useMemo, useCallback for avoiding re-renders. Code splitting. Virtualization (react
+window) for long lists. Avoid anonymous functions in JSX. Use production build. 
+Q: 44. What is the React component lifecycle? 
+A: Mount: constructor → render → componentDidMount (useEffect[]). Update: render → 
+componentDidUpdate (useEffect[deps]). Unmount: componentWillUnmount (useEffect cleanup). 
+Q: 45. What is Zustand? 
+A: Lightweight state management library. const useStore = create(set => ({ count: 0, inc: () => set(s => 
+({count: s.count+1})) })). Simpler than Redux, no boilerplate. 
+�
+� SECTION 3: NODE.JS (100 Questions) 
+PART A: Core Node.js Concepts (Q1–Q50) 
+Q: 1. What is Node.js? 
+A: Node.js is a server-side JavaScript runtime built on V8 engine. Uses event-driven, non-blocking I/O 
+model. Single-threaded but handles concurrency via event loop and libuv. 
+Q: 2. What is the event loop in Node.js? 
+A: Phases: timers (setTimeout/setInterval) → pending callbacks → idle/prepare → poll (I/O) → check 
+(setImmediate) → close callbacks. Microtasks (Promise, process.nextTick) run between phases. 
+Q: 3. What is npm? 
+A: Node Package Manager. npm install, npm run, package.json (dependencies, scripts, version). 
+package-lock.json locks exact versions. node_modules stores packages locally. 
+Q: 4. What is CommonJS? 
+A: Node's module system: const x = require('./module'); module.exports = x; Synchronous, cached after 
+first require. ES modules (import/export) now supported with .mjs or 'type':'module'. 
+Q: 5. What is process.env? 
+A: Object containing environment variables. process.env.PORT, process.env.NODE_ENV. Use dotenv 
+package to load from .env file. Never commit .env to git. 
+Q: 6. What is a stream in Node.js? 
+A: Data processed in chunks rather than all at once. Types: Readable (fs.createReadStream), Writable 
+(fs.createWriteStream), Duplex, Transform. Memory efficient for large files. 
+Q: 7. What is the Buffer class? 
+A: Represents binary data (before ES6 TypedArray). Used for file I/O, network data. Buffer.from('hello'), 
+buffer.toString('utf8'). Fixed-size raw memory. 
+Q: 8. What is cluster module? 
+A: Fork multiple worker processes (one per CPU core) sharing same port. Master process manages 
+workers. Overcomes single-thread limitation for CPU-bound tasks. 
+Q: 9. What is child_process module? 
+A: Spawn child processes: exec (shell command, buffered), spawn (streaming), fork (Node script with 
+IPC). exec('ls', callback) or const child = spawn('node', ['script.js']). 
+Q: 10. What is EventEmitter? 
+A: Core class for event-driven programming. emitter.on('event', fn) registers listener. 
+emitter.emit('event', data) fires it. emitter.removeListener() removes. Extend for custom events. 
+Q: 11. Difference between setTimeout and setImmediate? 
+A: setTimeout(fn, 0): fires in timers phase (≥0ms). setImmediate(fn): fires in check phase after I/O. 
+setImmediate usually faster after I/O callbacks. 
+Q: 12. What is process.nextTick? 
+A: Adds callback to microtask queue, runs before next event loop iteration (even before Promises). Use 
+sparingly—excessive use starves the event loop. 
+Q: 13. How do you handle errors in Node.js? 
+A: Callbacks: (err, data) pattern. Promises: .catch(). async/await: try/catch. 
+process.on('uncaughtException', ...) as last resort. Domain (deprecated). Graceful shutdown on errors. 
+Q: 14. What is the __dirname and __filename? 
+A: __dirname: absolute path of current directory. __filename: absolute path of current file. Note: not 
+available in ES modules (use import.meta.url + fileURLToPath instead). 
+Q: 15. What is REPL in Node.js? 
+A: Read-Eval-Print-Loop. Interactive shell: run 'node' in terminal. Useful for quick testing, evaluating 
+expressions, exploring APIs. 
+Q: 16. How to create an HTTP server in Node.js? 
+A: const http = require('http'); const server = http.createServer((req, res) => { res.writeHead(200); 
+res.end('Hello'); }); server.listen(3000); 
+Q: 17. What is libuv? 
+A: C library providing async I/O in Node.js. Manages thread pool (4 threads default) for file I/O, DNS, 
+crypto. Implements event loop across platforms. 
+Q: 18. What is middleware in Node.js context? 
+A: Functions that process requests in sequence. Each has access to req, res, next. call next() to pass 
+to next middleware or next(err) for error middleware. 
+Q: 19. What is package.json scripts? 
+A: Automate tasks: 'start': 'node index.js', 'dev': 'nodemon index.js', 'test': 'jest'. Run with npm run 
+<script>. npm start and npm test have shortcuts. 
+Q: 20. What is nodemon? 
+A: Dev tool that auto-restarts Node server when files change. Install: npm i -D nodemon. Script: 'dev': 
+'nodemon server.js'. No more manual restarts during development. 
+PART B: Node.js Coding Examples (Q21–Q60) 
+21. Create a basic HTTP server 
+const http = require('http'); 
+ 
+const server = http.createServer((req, res) => { 
+  if (req.url === '/' && req.method === 'GET') { 
+    res.writeHead(200, { 'Content-Type': 'application/json' }); 
+    res.end(JSON.stringify({ message: 'Hello World!' })); 
+  } else { 
+    res.writeHead(404); 
+    res.end('Not Found'); 
+  } 
+}); 
+ 
+server.listen(3000, () => console.log('Server running on port 3000')); 
+ 
+22. Read and write files asynchronously 
+const fs = require('fs').promises; 
+ 
+async function processFile() { 
+  try { 
+    const data = await fs.readFile('./input.txt', 'utf8'); 
+    const processed = data.toUpperCase(); 
+    await fs.writeFile('./output.txt', processed); 
+    console.log('File processed successfully'); 
+  } catch (err) { 
+    console.error('Error:', err.message); 
+  } 
+} 
+ 
+processFile(); 
+ 
+23. Custom EventEmitter 
+const EventEmitter = require('events'); 
+ 
+class OrderEmitter extends EventEmitter {} 
+const orderEvents = new OrderEmitter(); 
+ 
+orderEvents.on('orderPlaced', (order) => { 
+  console.log('Processing order:', order.id); 
+  // Send email, update inventory, etc. 
+}); 
+ 
+orderEvents.on('orderPlaced', (order) => { 
+  console.log('Sending confirmation to:', order.email); 
+}); 
+ 
+// Emit event 
+orderEvents.emit('orderPlaced', { id: 123, email: 'user@example.com' }); 
+ 
+24. Using streams for large file processing 
+const fs = require('fs'); 
+const readline = require('readline'); 
+ 
+async function processLargeCSV(filePath) { 
+  const fileStream = fs.createReadStream(filePath); 
+  const rl = readline.createInterface({ input: fileStream }); 
+  let lineCount = 0; 
+ 
+  for await (const line of rl) { 
+    lineCount++; 
+    // Process each line without loading entire file 
+    const fields = line.split(','); 
+    console.log('Row:', fields[0]); 
+  } 
+ 
+  console.log(`Processed ${lineCount} lines`); 
+} 
+ 
+25. Cluster for multi-core utilization 
+const cluster = require('cluster'); 
+const os = require('os'); 
+const http = require('http'); 
+ 
+if (cluster.isMaster) { 
+  const cpus = os.cpus().length; 
+  console.log(`Forking ${cpus} workers`); 
+  for (let i = 0; i < cpus; i++) cluster.fork(); 
+  cluster.on('exit', (worker, code) => { 
+    console.log(`Worker ${worker.id} died. Restarting...`); 
+    cluster.fork(); 
+  }); 
+} else { 
+  http.createServer((req, res) => { 
+    res.end(`Handled by worker ${process.pid}`); 
+  }).listen(3000); 
+} 
+ 
+  
+PART C: Advanced Node.js (Q61–Q100) 
+Q: 26. What is pm2? 
+A: Process manager for Node.js. pm2 start app.js --name 'api'. Auto-restart on crash, cluster mode, 
+logs, monitoring. pm2 save + pm2 startup for boot persistence. 
+Q: 27. How to implement rate limiting in Node.js? 
+A: Use express-rate-limit: const limiter = rateLimit({ windowMs: 15*60*1000, max: 100 }); 
+app.use(limiter). Prevents DDoS and brute force. 
+Q: 28. What is helmet.js? 
+A: Express middleware setting security HTTP headers (CSP, HSTS, X-Frame-Options, etc.). 
+app.use(helmet()). Protects against common web vulnerabilities. 
+Q: 29. What is CORS and how to enable it? 
+A: Cross-Origin Resource Sharing. Browser blocks requests to different origins. app.use(cors({ origin: 
+'https://frontend.com', credentials: true })). Or use cors() for all origins. 
+Q: 30. What is the difference between require and import? 
+A: require: CommonJS, synchronous, conditional use. import: ES Modules, async, tree-shakeable, top
+level only. Node supports both—use .mjs for ES or set 'type':'module' in package.json. 
+Q: 31. How do you handle environment-specific config? 
+A: Use dotenv + .env files per environment (.env.development, .env.production). Never commit secrets. 
+Use process.env.NODE_ENV to branch logic. Docker/cloud inject env vars. 
+Q: 32. What is a REST API? 
+A: Representational State Transfer. Stateless, client-server, uniform interface. HTTP verbs: GET 
+(read), POST (create), PUT/PATCH (update), DELETE. Resources as URLs: /users, /users/:id. 
+Q: 33. What is middleware order in Express? 
+A: Middleware executes in order registered. Error middleware (4 params) comes last. next() passes to 
+next; next(err) to error handler. app.use() for global, router.use() for router-level. 
+Q: 34. How to upload files in Node.js? 
+A: Use multer middleware: const upload = multer({ dest: 'uploads/' }); router.post('/upload', 
+upload.single('file'), handler). Validates file type, size. Store in disk or cloud (S3). 
+Q: 35. What is WebSocket in Node.js? 
+A: Full-duplex communication over single connection. Use ws or socket.io library. Real-time features: 
+chat, live updates. const wss = new WebSocketServer({ port: 8080 }); 
+�
+� SECTION 4: MONGODB (80 Questions) 
+PART A: MongoDB Concepts (Q1–Q40) 
+Q: 1. What is MongoDB? 
+A: NoSQL document-oriented database. Stores BSON (Binary JSON) documents. Schema-less/flexible 
+schema. Horizontally scalable. Good for unstructured/semi-structured data. 
+Q: 2. Difference between SQL and MongoDB terminology? 
+A: SQL: Table=Collection, Row=Document, Column=Field, Primary Key=_id, JOIN=Aggregation 
+$lookup. MongoDB collections hold JSON-like documents. 
+Q: 3. What is BSON? 
+A: Binary JSON. MongoDB's storage format. Supports additional types: Date, ObjectId, Binary, 
+Decimal128. More efficient than JSON for parsing and storage. 
+Q: 4. What is ObjectId? 
+A: Default _id type. 12-byte value: 4-byte timestamp + 5-byte random + 3-byte counter. Globally 
+unique, contains creation time. ObjectId.getTimestamp() returns date. 
+Q: 5. What are indexes in MongoDB? 
+A: Data structures improving query performance. Default _id index. Create: 
+db.users.createIndex({email: 1}). Types: single, compound, multikey, text, geospatial, sparse. 
+Q: 6. What is the aggregation pipeline? 
+A: Framework for data transformation/analysis. Stages: $match (filter), $group (aggregate), $project 
+(reshape), $sort, $limit, $skip, $lookup (join), $unwind. 
+Q: 7. What is sharding? 
+A: Horizontal scaling by partitioning data across multiple servers (shards). Shard key determines 
+distribution. Mongos router directs queries. Good for huge datasets. 
+Q: 8. What is replication in MongoDB? 
+A: Replica set: primary + secondary nodes. Primary handles writes, secondaries replicate. Automatic 
+failover if primary goes down. Provides high availability. 
+Q: 9. What are MongoDB operators? 
+A: Comparison: $eq, $ne, $gt, $gte, $lt, $lte, $in, $nin. Logical: $and, $or, $not, $nor. Update: $set, 
+$unset, $inc, $push, $pull, $addToSet. 
+Q: 10. What is Mongoose? 
+A: ODM (Object Document Mapper) for MongoDB and Node.js. Provides schema validation, 
+middleware, virtuals, query building. Schema → Model → Document pattern. 
+Q: 11. What is a Mongoose schema? 
+A: Defines structure and validation for documents. const schema = new Schema({ name: { type: String, 
+required: true }, age: Number }). Supports defaults, validators, timestamps. 
+Q: 12. What are Mongoose virtuals? 
+A: Properties not stored in DB. Computed from existing fields: schema.virtual('fullName').get(function() 
+{ return this.first + ' ' + this.last; }). Useful for derived data. 
+Q: 13. What is population in Mongoose? 
+A: Automatic reference replacement (like JOIN). User has { posts: [{ type: ObjectId, ref: 'Post' }] }. 
+User.findById(id).populate('posts') fetches actual Post documents. 
+Q: 14. What is $lookup in aggregation? 
+A: Performs LEFT JOIN with another collection. { $lookup: { from: 'orders', localField: '_id', foreignField: 
+'userId', as: 'orders' } } 
+Q: 15. What are sparse indexes? 
+A: Only index documents where the field exists. createIndex({email:1}, {sparse:true}). Useful for 
+optional fields—avoids indexing documents with missing/null values. 
+Q: 16. What is TTL index? 
+A: Time-To-Live index auto-deletes documents after expiration. createIndex({createdAt: 1}, 
+{expireAfterSeconds: 3600}). Perfect for sessions, logs, temporary data. 
+Q: 17. What is the difference between findOne and find? 
+A: findOne: returns first matching document or null. find: returns cursor of all matches. Use .toArray() to 
+convert cursor. find({}) returns all documents. 
+Q: 18. What is $unwind in aggregation? 
+A: Deconstructs array field into multiple documents. { $unwind: '$tags' } creates one document per tag 
+element. Required before grouping by array elements. 
+Q: 19. Explain MongoDB transactions. 
+A: Multi-document ACID transactions (since v4.0, requires replica set). session.startTransaction(); 
+operations; session.commitTransaction() or abortTransaction(). Higher overhead than single-doc ops. 
+Q: 20. What is the difference between $push and $addToSet? 
+A: $push: adds element to array (allows duplicates). $addToSet: adds only if not already present 
+(ensures uniqueness). Both use $each for multiple elements. 
+PART B: MongoDB Queries & Aggregation (Q21–Q55) 
+21. Basic CRUD operations in MongoDB 
+// CREATE 
+db.users.insertOne({ name: 'Raj', age: 25, city: 'Delhi' }); 
+db.users.insertMany([{ name: 'Priya' }, { name: 'Amit' }]); 
+ 
+// READ 
+db.users.find({ city: 'Delhi' }).sort({ age: -1 }).limit(10); 
+db.users.findOne({ name: 'Raj' }); 
+db.users.countDocuments({ city: 'Mumbai' }); 
+ 
+// UPDATE 
+db.users.updateOne({ name: 'Raj' }, { $set: { age: 26 } }); 
+db.users.updateMany({ city: 'Delhi' }, { $set: { state: 'DL' } }); 
+db.users.findOneAndUpdate({ name: 'Raj' }, { $inc: { age: 1 } }, { 
+returnDocument: 'after' }); 
+ 
+// DELETE 
+db.users.deleteOne({ name: 'Raj' }); 
+db.users.deleteMany({ active: false }); 
+ 
+22. Aggregation pipeline example 
+// Find avg salary by department, only for salary > 30000 
+db.employees.aggregate([ 
+  { $match: { salary: { $gt: 30000 } } }, 
+  { $group: { 
+      _id: '$department', 
+      avgSalary: { $avg: '$salary' }, 
+      count: { $sum: 1 } 
+  }}, 
+  { $sort: { avgSalary: -1 } }, 
+  { $limit: 5 }, 
+  { $project: { department: '$_id', avgSalary: 1, count: 1, _id: 0 } } 
+]); 
+ 
+23. Mongoose model with validation 
+const mongoose = require('mongoose'); 
+ 
+const userSchema = new mongoose.Schema({ 
+  name: { type: String, required: [true, 'Name is required'], trim: true }, 
+  email: { type: String, required: true, unique: true, lowercase: true, 
+           match: [/^\S+@\S+\.\S+$/, 'Invalid email'] }, 
+  password: { type: String, required: true, minlength: 6, select: false }, 
+  role: { type: String, enum: ['user','admin'], default: 'user' }, 
+  isActive: { type: Boolean, default: true }, 
+}, { timestamps: true }); 
+ 
+// Virtual 
+userSchema.virtual('displayName').get(function() { return 
+this.name.toUpperCase(); }); 
+ 
+// Pre-save middleware 
+userSchema.pre('save', async function(next) { 
+if (this.isModified('password')) { 
+this.password = await bcrypt.hash(this.password, 12); 
+} 
+next(); 
+}); 
+module.exports = mongoose.model('User', userSchema); 
+24. $lookup (JOIN) in aggregation 
+// Join orders with users collection 
+db.orders.aggregate([ 
+{ $match: { status: 'delivered' } }, 
+{ $lookup: { 
+from: 'users', 
+localField: 'userId', 
+foreignField: '_id', 
+as: 'user' 
+}}, 
+{ $unwind: '$user' }, 
+{ $project: { 
+orderId: 1, 
+amount: 1, 
+'user.name': 1, 
+'user.email': 1 
+}} 
+]); 
+PART C: Advanced MongoDB (Q56–Q80) 
+Q: 25. What is the WiredTiger storage engine? 
+A: Default MongoDB storage engine since v3.2. Document-level concurrency, compression 
+(snappy/zlib), journaling. Replaced MMAPv1. Better memory utilization. 
+Q: 26. How to create a text index and search? 
+A: db.articles.createIndex({title:'text', body:'text'}). Search: db.articles.find({$text:{$search:'mongodb 
+query'}}). Sorted by relevance score: {score:{$meta:'textScore'}}. 
+Q: 27. What is capped collection? 
+A: Fixed-size collection that auto-removes oldest documents. Like circular buffer. Good for logs, cache. 
+db.createCollection('logs', {capped:true, size:1000000, max:1000}). 
+Q: 28. What is write concern? 
+A: Controls acknowledgment for write operations. {w:1} (primary), {w:'majority'} (majority of replica set). 
+{j:true} requires journal write. Higher concern = safer but slower. 
+Q: 29. What is read preference? 
+A: Directs read operations: primary (default), primaryPreferred, secondary (replica reads), 
+secondaryPreferred, nearest. Use secondary for read-heavy analytics. 
+Q: 30. Difference between embedded vs referenced documents? 
+A: Embed: related data in same document (faster reads, atomic updates, document size limit 16MB). 
+Reference: separate collections with _id refs (avoids duplication, flexible). Choose based on access 
+patterns. 
+�
+� SECTION 5: EXPRESS.JS (50 Questions) 
+Core Express Concepts 
+Q: 1. What is Express.js? 
+A: Minimal, flexible Node.js web framework. Provides routing, middleware, HTTP utilities. De facto 
+standard for Node.js APIs. Unopinionated—gives you full control. 
+Q: 2. What is routing in Express? 
+A: Defines endpoints: app.get('/users', handler). Methods: get, post, put, patch, delete. Route params: 
+/users/:id. Query: req.query. router.route() chains multiple methods. 
+Q: 3. What is middleware in Express? 
+A: Function with (req, res, next). Executes in order. Types: application-level (app.use), router-level, 
+error-handling (4 params), built-in (json, static), third-party. 
+Q: 4. What is Express Router? 
+A: Mini app instance for organizing routes: const router = express.Router(). Group related routes. 
+Mount on app: app.use('/api/users', userRouter). Supports middleware per router. 
+Q: 5. How to handle errors in Express? 
+A: Error middleware: app.use((err, req, res, next) => { res.status(err.status || 500).json({error: 
+err.message}); }). Must be registered last. Pass errors with next(err). 
+Q: 6. What is express.json() and express.urlencoded()? 
+A: Built-in middleware. json(): parses JSON body (Content-Type: application/json). urlencoded(): 
+parses HTML form data (Content-Type: application/x-www-form-urlencoded). 
+Q: 7. How to serve static files? 
+A: app.use(express.static('public')). Serves files from 'public' directory. With prefix: app.use('/static', 
+express.static('public')). index.html served at /. 
+Q: 8. What is req.params vs req.query vs req.body? 
+A: params: /users/:id → req.params.id (URL path). query: /users?page=2 → req.query.page (URL 
+query string). body: POST/PUT request body → req.body (needs parser middleware). 
+Q: 9. What are response methods? 
+A: res.json(): JSON response. res.send(): string/buffer. res.status(404).json({}). res.redirect('/new-url'). 
+res.sendFile(path). res.render() for templates. 
+Q: 10. What is express-validator? 
+A: Validation middleware: const { body, validationResult } = require('express-validator'). Chain: 
+body('email').isEmail().normalizeEmail(). Check errors: validationResult(req).isEmpty(). 
+📝 COMPLETE CRUD API (Paper Coding) 
+Full RESTful API implementation with Express + MongoDB: 
+// server.js 
+const express = require('express'); 
+const mongoose = require('mongoose'); 
+const cors = require('cors'); 
+require('dotenv').config(); 
+ 
+const app = express(); 
+app.use(express.json()); 
+app.use(cors()); 
+ 
+// Connect to MongoDB 
+mongoose.connect(process.env.MONGO_URI) 
+  .then(() => console.log('MongoDB Connected')) 
+  .catch(err => console.error(err)); 
+ 
+// Product Schema 
+const productSchema = new mongoose.Schema({ 
+  name: { type: String, required: true }, 
+  price: { type: Number, required: true, min: 0 }, 
+  category: String, 
+  stock: { type: Number, default: 0 }, 
+  isActive: { type: Boolean, default: true } 
+}, { timestamps: true }); 
+ 
+const Product = mongoose.model('Product', productSchema); 
+ 
+// ─── ROUTES ─────────────────────────────────────────── 
+ 
+// GET all products (with pagination + filter) 
+app.get('/api/products', async (req, res) => { 
+  try { 
+    const { page = 1, limit = 10, category, search } = req.query; 
+    const filter = { isActive: true }; 
+    if (category) filter.category = category; 
+    if (search) filter.name = { $regex: search, $options: 'i' }; 
+ 
+    const products = await Product 
+      .find(filter) 
+      .skip((page - 1) * limit) 
+      .limit(Number(limit)) 
+      .sort({ createdAt: -1 }); 
+ 
+    const total = await Product.countDocuments(filter); 
+    res.json({ products, total, pages: Math.ceil(total / limit) }); 
+  } catch (err) { 
+    res.status(500).json({ error: err.message }); 
+  } 
+}); 
+ 
+// GET product by ID 
+app.get('/api/products/:id', async (req, res) => { 
+  try { 
+    const product = await Product.findById(req.params.id); 
+    if (!product) return res.status(404).json({ error: 'Product not found' }); 
+    res.json(product); 
+  } catch (err) { 
+    res.status(500).json({ error: err.message }); 
+  } 
+}); 
+ 
+// POST create product 
+app.post('/api/products', async (req, res) => { 
+  try { 
+    const product = new Product(req.body); 
+    await product.save(); 
+    res.status(201).json(product); 
+  } catch (err) { 
+    res.status(400).json({ error: err.message }); 
+  } 
+}); 
+ 
+// PUT update product 
+app.put('/api/products/:id', async (req, res) => { 
+  try { 
+    const product = await Product.findByIdAndUpdate( 
+      req.params.id, 
+      req.body, 
+      { new: true, runValidators: true } 
+    ); 
+    if (!product) return res.status(404).json({ error: 'Not found' }); 
+    res.json(product); 
+  } catch (err) { 
+    res.status(400).json({ error: err.message }); 
+  } 
+}); 
+ 
+// DELETE (soft delete) 
+app.delete('/api/products/:id', async (req, res) => { 
+  try { 
+    const product = await Product.findByIdAndUpdate( 
+      req.params.id, 
+      { isActive: false }, 
+      { new: true } 
+    ); 
+    if (!product) return res.status(404).json({ error: 'Not found' }); 
+    res.json({ message: 'Product deleted', product }); 
+  } catch (err) { 
+    res.status(500).json({ error: err.message }); 
+  } 
+}); 
+ 
+// Error handler 
+app.use((err, req, res, next) => { 
+  res.status(err.status || 500).json({ error: err.message }); 
+}); 
+ 
+app.listen(process.env.PORT || 3000, () => console.log('Server started')); 
+  
+�
+� SECTION 6: JWT & AUTHENTICATION (30 Questions) 
+JWT Concepts & Implementation 
+Q: 1. What is JWT? 
+A: JSON Web Token. Stateless authentication token: Header.Payload.Signature (Base64 encoded). 
+Header: algo. Payload: claims (userId, role, exp). Signature: HMAC-SHA256 or RSA. 
+Q: 2. JWT vs Session-based auth? 
+A: Session: server stores session data (stateful). JWT: client stores token (stateless). JWT: scalable for 
+microservices, no DB lookup per request. Session: easy revocation, smaller payload. 
+Q: 3. What are JWT claims? 
+A: Registered: iss (issuer), sub (subject), exp (expiration), iat (issued at), nbf (not before). Public: 
+custom (userId, email). Private: app-specific. Payload is Base64—don't store secrets! 
+Q: 4. How to refresh JWT tokens? 
+A: Use short-lived access token (15min) + long-lived refresh token (7d). On access token expiry, client 
+sends refresh token to /auth/refresh endpoint. Server validates and issues new access token. 
+Q: 5. What is the difference between authentication and authorization? 
+A: Authentication: proving identity (who are you?). Authorization: checking permissions (what can you 
+do?). Authenticate first, then authorize based on role/permissions. 
+Q: 6. What is bcrypt? 
+A: Password hashing library. bcrypt.hash(password, 12) generates salt+hash. bcrypt.compare(input, 
+stored) verifies. Slow by design (configurable rounds) to resist brute force. 
+Q: 7. What is OAuth 2.0? 
+A: Authorization protocol (not authentication). Flows: Authorization Code (web apps), Implicit, Client 
+Credentials (server-server), Device. Used for 'Login with Google/GitHub'. OpenID Connect adds 
+authentication layer. 
+Q: 8. What is HTTPS and why important for auth? 
+A: TLS/SSL encrypted HTTP. Prevents man-in-the-middle attacks, token theft. Always use HTTPS in 
+production. JWT in Authorization header is exposed without HTTPS. 
+Q: 9. Where to store JWT on client? 
+A: Memory (React state): most secure, lost on refresh. HttpOnly cookie: safe from XSS, vulnerable to 
+CSRF. localStorage: vulnerable to XSS. Recommendation: HttpOnly cookies with CSRF token. 
+Q: 10. What are common auth vulnerabilities? 
+A: SQL injection, XSS (steal tokens), CSRF, brute force (rate limit), JWT algorithm confusion (none 
+alg), insecure direct object reference, session fixation. Always validate and sanitize input. 
+📝 COMPLETE LOGIN/AUTH API (Paper Coding) 
+// auth.routes.js 
+const express = require('express'); 
+const bcrypt = require('bcryptjs'); 
+const jwt = require('jsonwebtoken'); 
+const User = require('../models/User'); 
+const router = express.Router(); 
+ 
+// ─── REGISTER ─────────────────────────────────────── 
+router.post('/register', async (req, res) => { 
+  try { 
+    const { name, email, password } = req.body; 
+ 
+    // Validation 
+    if (!name || !email || !password) 
+      return res.status(400).json({ error: 'All fields required' }); 
+    if (password.length < 6) 
+      return res.status(400).json({ error: 'Password min 6 chars' }); 
+ 
+    // Check if exists 
+    const exists = await User.findOne({ email }); 
+    if (exists) return res.status(409).json({ error: 'Email already registered' 
+}); 
+ 
+    // Hash password 
+    const hashedPassword = await bcrypt.hash(password, 12); 
+ 
+    // Create user 
+    const user = await User.create({ name, email, password: hashedPassword }); 
+ 
+    // Generate token 
+    const token = jwt.sign( 
+      { userId: user._id, email: user.email, role: user.role }, 
+      process.env.JWT_SECRET, 
+      { expiresIn: '15m' } 
+    ); 
+ 
+    const refreshToken = jwt.sign( 
+      { userId: user._id }, 
+      process.env.REFRESH_SECRET, 
+      { expiresIn: '7d' } 
+    ); 
+ 
+    res.status(201).json({ 
+      message: 'Registration successful', 
+      token, 
+      refreshToken, 
+      user: { id: user._id, name: user.name, email: user.email } 
+    }); 
+  } catch (err) { 
+    res.status(500).json({ error: err.message }); 
+  } 
+}); 
+ 
+// ─── LOGIN ────────────────────────────────────────── 
+router.post('/login', async (req, res) => { 
+  try { 
+    const { email, password } = req.body; 
+    if (!email || !password) return res.status(400).json({ error: 'All fields 
+required' }); 
+ 
+    // Find user (include password) 
+    const user = await User.findOne({ email }).select('+password'); 
+    if (!user) return res.status(401).json({ error: 'Invalid credentials' }); 
+ 
+    // Compare password 
+    const isMatch = await bcrypt.compare(password, user.password); 
+    if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' }); 
+ 
+    // Generate tokens 
+    const token = jwt.sign( 
+      { userId: user._id, email: user.email, role: user.role }, 
+      process.env.JWT_SECRET, 
+      { expiresIn: '15m' } 
+    ); 
+    const refreshToken = jwt.sign( 
+      { userId: user._id }, 
+      process.env.REFRESH_SECRET, 
+      { expiresIn: '7d' } 
+    ); 
+ 
+    res.json({ token, refreshToken, user: { id: user._id, name: user.name, role: 
+user.role } }); 
+  } catch (err) { 
+    res.status(500).json({ error: err.message }); 
+  } 
+}); 
+ 
+// ─── REFRESH TOKEN ────────────────────────────────── 
+router.post('/refresh', (req, res) => { 
+  const { refreshToken } = req.body; 
+  if (!refreshToken) return res.status(401).json({ error: 'No refresh token' }); 
+ 
+  try { 
+    const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET); 
+    const token = jwt.sign( 
+      { userId: decoded.userId }, 
+      process.env.JWT_SECRET, 
+      { expiresIn: '15m' } 
+    ); 
+    res.json({ token }); 
+  } catch { 
+    res.status(403).json({ error: 'Invalid refresh token' }); 
+  } 
+}); 
+ 
+// ─── MIDDLEWARE: PROTECT ROUTES ───────────────────── 
+const protect = (req, res, next) => { 
+  const authHeader = req.headers.authorization; 
+  if (!authHeader?.startsWith('Bearer ')) 
+    return res.status(401).json({ error: 'No token provided' }); 
+ 
+  try { 
+    const token = authHeader.split(' ')[1]; 
+    req.user = jwt.verify(token, process.env.JWT_SECRET); 
+    next(); 
+  } catch { 
+res.status(401).json({ error: 'Token invalid or expired' }); 
+} 
+}; 
+// Role-based authorization 
+const authorize = (...roles) => (req, res, next) => { 
+if (!roles.includes(req.user.role)) 
+return res.status(403).json({ error: 'Access denied' }); 
+next(); 
+}; 
+// Usage: 
+// router.get('/admin', protect, authorize('admin'), handler); 
+module.exports = { router, protect, authorize }; 
+�
+� SECTION 7: 50 MCQs (Multiple Choice Questions) 
+MCQ Questions with Answers 
+1. What does 'typeof null' return in JavaScript? 
+• A) null 
+• B) object ✅ 
+• C) undefined 
+• D) NaN 
+Answer: B — typeof null === 'object' is a historical JavaScript bug. 
+2. Which hook is used for side effects in React? 
+• A) useState 
+• B) useContext 
+• C) useEffect ✅ 
+• D) useRef 
+Answer: C — useEffect runs after renders to handle side effects like API calls. 
+3. What is the default port for MongoDB? 
+• A) 3000 
+• B) 5432 
+• C) 27017 ✅ 
+• D) 8080 
+Answer: C — MongoDB runs on port 27017 by default. 
+4. Which command initializes a new Node.js project? 
+• A) node init 
+• B) npm init ✅ 
+• C) npm start 
+• D) npx create 
+Answer: B — npm init creates package.json interactively. 
+5. What does REST stand for? 
+• A) Representational State Transfer ✅ 
+• B) Remote State Testing 
+• C) Reactive State Transfer 
+• D) Real-time State Transfer 
+Answer: A — REST is an architectural style for web services. 
+6. Which HTTP status code means 'Not Found'? 
+• A) 401 
+• B) 403 
+• C) 404 ✅ 
+• D) 500 
+Answer: C — 404 means the requested resource was not found. 
+7. What does CORS stand for? 
+• A) Cross-Origin Resource Sharing ✅ 
+• B) Client-Origin Request Service 
+• C) Centralized Object Request System 
+• D) None 
+Answer: A — CORS controls which origins can access server resources. 
+8. Which Mongoose method finds a document and updates it in one operation? 
+• A) findAndUpdate 
+• B) findOneAndUpdate ✅ 
+• C) updateAndFind 
+• D) findThenUpdate 
+Answer: B — findOneAndUpdate with {new: true} returns updated document. 
+9. What does JWT stand for? 
+• A) Java Web Token 
+• B) JavaScript Web Transfer 
+• C) JSON Web Token ✅ 
+• D) JSON Web Transfer 
+Answer: C — JWT is a compact, URL-safe token format. 
+10. What is the purpose of useCallback? 
+• A) Memoize return value 
+• B) Memoize function reference ✅ 
+• C) Manage side effects 
+• D) Replace useState 
+Answer: B — useCallback prevents function recreation on every render. 
+11. Which MongoDB operator adds to array only if not present? 
+• A) $push 
+• B) $add 
+• C) $addToSet ✅ 
+• D) $set 
+Answer: C — $addToSet ensures array uniqueness. 
+12. What is the correct way to handle async errors in Express? 
+• A) try/catch + next(err) ✅ 
+• B) console.error() 
+• C) throw new Error() 
+• D) process.exit() 
+Answer: A — Pass errors to next(err) to reach error middleware. 
+13. What does 'npm run dev' execute? 
+• A) The 'main' entry 
+• B) The 'dev' script in package.json ✅ 
+• C) The test suite 
+• D) Node.js REPL 
+Answer: B — npm run <script> executes named scripts from package.json. 
+14. Which React hook gives access to the previous render value? 
+• A) useState 
+• B) usePrev 
+• C) useRef ✅ 
+• D) useMemo 
+Answer: C — useRef stores mutable value persisted across renders without re-render. 
+15. What is bcrypt used for? 
+• A) Encryption 
+• B) Hashing ✅ 
+• C) Encoding 
+• D) Compression 
+Answer: B — bcrypt is a one-way hashing function for passwords. 
+16. Which phase does setImmediate execute in the event loop? 
+• A) timers 
+• B) poll 
+• C) check ✅ 
+• D) close callbacks 
+Answer: C — setImmediate runs in the check phase, after I/O. 
+17. What does 'select: false' do in a Mongoose schema? 
+• A) Ignores the field 
+• B) Excludes from query results by default ✅ 
+• C) Marks as optional 
+• D) Hides from schema 
+Answer: B — Must explicitly .select('+password') to include it. 
+18. Which React method wraps component to prevent unnecessary re-renders? 
+• A) useMemo 
+• B) React.PureComponent 
+• C) React.memo ✅ 
+• D) shouldComponentUpdate 
+Answer: C — React.memo is HOC for functional components. 
+19. What is the spread operator represented by? 
+• A) ** 
+• B) -> 
+• C) ... 
+• D) ...  ✅ 
+Answer: D — The spread operator ... expands iterables. 
+20. Which MongoDB command starts the aggregation pipeline? 
+• A) db.find() 
+• B) db.aggregate() ✅ 
+• C) db.pipeline() 
+• D) db.query() 
+Answer: B — db.collection.aggregate([...stages...]). 
+�
+� SECTION 8: HR + Resume + Project Questions 
+HR Questions (with sample answers) 
+Q: 1. Tell me about yourself. 
+A: Keep it 2–3 minutes. Structure: Background → Technical Skills → Projects → Why this role. 'I'm a 
+B.Tech graduate passionate about full-stack development. I've built X projects using MERN stack, 
+including [your best project]. I'm looking for a role where I can contribute and grow as a developer.' 
+Q: 2. Why do you want to join our company? 
+A: Research the company! 'I admire your [product/mission]. Your tech stack aligns with my skills, and 
+I've seen your commitment to [engineering culture/innovation]. I believe I can contribute to [specific 
+team/product] while learning from experienced engineers here.' 
+Q: 3. Where do you see yourself in 5 years? 
+A: 'In 5 years, I see myself as a senior full-stack developer, contributing to architectural decisions and 
+mentoring junior developers. I want to deepen my expertise in system design and possibly explore 
+team leadership.' 
+Q: 4. What is your greatest strength? 
+A: Choose a real technical strength with evidence: 'My greatest strength is problem-solving. When I hit 
+a bug, I systematically debug step by step. In my [project name], I resolved a N+1 query problem that 
+improved performance by 60%.' 
+Q: 5. What is your greatest weakness? 
+A: Be honest but show growth: 'I used to struggle with time estimation in projects. I've learned to break 
+tasks into smaller subtasks and use tools like Trello/Jira. Now my estimates are much more accurate.' 
+Q: 6. Why should we hire you? 
+A: 'I bring hands-on MERN stack experience from building real projects. I learn quickly, I have strong 
+fundamentals, and I'm genuinely passionate about writing clean, maintainable code. I'll add value from 
+day one and grow with your team.' 
+Q: 7. Tell me about a challenge you faced in a project. 
+A: Use STAR method: Situation, Task, Action, Result. 'In my [project], the API was taking 3 seconds. I 
+analyzed MongoDB queries, found missing indexes, added compound indexes, and reduced response 
+time to under 200ms.' 
+Q: 8. How do you handle tight deadlines? 
+A: 'I prioritize tasks using MoSCoW method. I communicate early if something's at risk. I focus on MVP 
+first, then enhancements. I also don't hesitate to ask for help or clarification from team leads.' 
+Q: 9. Do you prefer working alone or in a team? 
+A: 'I'm comfortable with both. I enjoy collaboration for brainstorming and code reviews, but I'm also 
+productive working independently. I use Git and proper documentation to keep teams aligned.' 
+Q: 10. What are your salary expectations? 
+A: Research market rates. 'Based on my research and skills, I'm targeting [X LPA]. I'm open to 
+discussion based on the overall package, growth opportunities, and learning environment.' 
+Resume Questions 
+Q: 1. Tell me about this project on your resume. 
+A: Know every project deeply: tech stack, your specific role, problems solved, how it works end-to-end, 
+what you'd do differently, scalability considerations. 
+Q: 2. What was the most challenging part of building X? 
+A: Prepare a real challenge: authentication flow, performance issue, API integration error, deployment 
+problem. Show your problem-solving process. 
+Q: 3. How many users does your project have? 
+A: If a personal project, say: 'It's a personal/learning project, but I've designed it with production 
+patterns like JWT auth, input validation, error handling, and pagination.' 
+Q: 4. What would you improve about your project? 
+A: Show architectural thinking: 'I'd add Redis caching for frequently accessed data, implement proper 
+monitoring with tools like Sentry, and containerize with Docker for easier deployment.' 
+Q: 5. How did you learn MERN stack? 
+A: Be specific: 'I started with JavaScript fundamentals on MDN, then did a React course. I built projects 
+alongside tutorials—my todo app, then a more complex authentication app, then [your resume project].' 
+Project-Based Technical Questions 
+Q: 1. Explain your project architecture. 
+A: Describe: Frontend (React + React Router + State management), Backend (Node/Express + JWT 
+auth + middleware), Database (MongoDB + Mongoose schemas), Deployment 
+(Vercel/Render/Railway). Draw if asked. 
+Q: 2. How did you handle authentication? 
+A: JWT-based: Registration (hash password with bcrypt) → Login (verify + generate JWT) → Protected 
+routes (middleware extracts + verifies token from Authorization header). 
+Q: 3. How did you handle errors globally? 
+A: Express error middleware, React error boundaries, proper HTTP status codes, user-friendly error 
+messages, server-side logging. 
+Q: 4. How would you make your app scale? 
+A: Horizontal scaling, MongoDB sharding, Redis caching, CDN for static assets, load balancer, 
+microservices, PM2 cluster mode, connection pooling. 
+Q: 5. How did you manage the project? 
+A: Git workflow (feature branches, PRs), README documentation, Postman for API testing, 
+environment variables with dotenv, folder structure (MVC pattern). 
+�
+� FINAL: Interview Tips & Quick Reference 
+Interview Strategy & Tips 
+• Think out loud — interviewers want to see your problem-solving process, not just the answer 
+• If stuck, start with brute force, then optimize — show your thinking evolution 
+• Ask clarifying questions before coding — scope, edge cases, constraints 
+• Write clean, readable code — comments where needed, meaningful variable names 
+• For system design questions, think: Scale → Availability → Consistency → Components 
+• Always test your code mentally with edge cases: empty array, null, 0, negative numbers 
+• Know Big O notation basics — O(1), O(n), O(n²), O(log n) — interviewers often ask 
+• For behavioral questions, prepare 3-4 STAR stories from your projects 
+• Have questions ready for the interviewer — shows genuine interest 
+• Follow up via email within 24 hours thanking them for the opportunity 
+Quick HTTP Status Codes Reference 
+• 200 OK — Successful GET/PUT 
+• 201 Created — Successful POST 
+• 204 No Content — Successful DELETE 
+• 400 Bad Request — Invalid input 
+• 401 Unauthorized — Not authenticated 
+• 403 Forbidden — Not authorized 
+• 404 Not Found — Resource missing 
+• 409 Conflict — Duplicate resource 
+• 422 Unprocessable Entity — Validation error 
+• 429 Too Many Requests — Rate limited 
+• 500 Internal Server Error — Server crash 
+• 502 Bad Gateway — Upstream server error 
+Topic Priority for Different LPA Ranges 
+2-4 LPA (Fresher): 
+• JS basics: closures, promises, async/await, array methods 
+• React: useState, useEffect, props, basic CRUD component 
+• Node/Express: REST API, basic auth, error handling 
+• MongoDB: CRUD operations, Mongoose models 
+5-7 LPA (Strong Fresher / 1yr exp): 
+• JS advanced: event loop, prototype chain, design patterns 
+• React: Context, useReducer, performance optimization, hooks 
+• Node: Streams, cluster, file system, JWT refresh tokens 
+• MongoDB: Aggregation, indexes, population, transactions 
+8-10 LPA (Mid-Level): 
+• System design: caching, scaling, microservices, message queues 
+• React: Custom hooks, code splitting, SSR (Next.js basics) 
+• Node: WebSockets, rate limiting, security best practices, PM2 
+• MongoDB: Sharding, replication, performance tuning 
+�
+� Best of luck! You've got this! 💪 
+Consistent practice > Last-minute cramming 
